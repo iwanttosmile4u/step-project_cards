@@ -1,0 +1,24 @@
+.background {
+  background: linear-gradient(
+    180deg,
+    rgba(109, 221, 240, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 800px;
+  padding-top: 50px;
+}
+
+.header-select {
+  color: $mainTextColor;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-select {
+  color: $hoverTextColor;
+}
