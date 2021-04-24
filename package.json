@@ -36,5 +36,9 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "sass": "^1.32.8"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "vanilla-modal": "^1.6.5"
   }
 }

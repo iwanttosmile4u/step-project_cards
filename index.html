@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.bundle.min.js" />
     <link rel="stylesheet" href="dist/css/style.min.css" />
   </head>
   <body>
@@ -70,8 +69,11 @@
               </g>
             </svg>
           </a>
-              <button class="btn btn-lg btn-info me-3 rounded-pill fs-4 text-uppercase">
-                Exit
+              <button class="btn btn-lg btn-info me-3 rounded-pill fs-4 text-uppercase" id="loginButton">
+                Login
+              </button>
+              <button class="btn btn-lg btn-info me-3 rounded-pill fs-4 text-uppercase" hidden = "true" id="createButton">
+                Create
               </button>
       </nav>
     </header>
@@ -105,6 +107,29 @@
         </div>
       </div>
       </div>
+      <!-- Modal -->
+      <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-info text-white">
+            <div class="modal-header">
+              <h5 class="modal-title text-uppercase fs-4 fw-bold mx-auto" id="exampleModalLabel">Registration</h5>
+              <button type="button" class="btn-close m-0" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <input name="email" value="username@user.co" type="text" class="form-control" placeholder="user login" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              </div>
+              <div class="input-group mb-3">
+                <input name="password" value="user12345" type="password" class="form-control" placeholder="user password" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              </div>
+            </div>
+            <div class="modal-footer mx-auto">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary js-login">Log in</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer class="footer-block">
       <div class="container">
@@ -114,7 +139,6 @@
       </p>
     </div>
     </footer>
-
     <script src="dist/js/script.min.js"></script>
   </body>
 </html>
