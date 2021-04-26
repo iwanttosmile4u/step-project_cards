@@ -1,6 +1,7 @@
 import { Login } from "./modals/login";
 import { User as UserApi } from "./api/user";
 import { Storage } from "./api/storage";
+import { createCardModal } from "./modals/card-form";
 
 export class Application {
   constructor() {
@@ -12,6 +13,12 @@ export class Application {
     document.querySelector("#loginButton").onclick = () => {
       const loginModal = new Login();
       loginModal.show();
+    };
+
+    //по кліку з'являється модалка з формою
+    document.querySelector("#createButton").onclick = () => {
+      const doctorVisitModal = new createCardModal();
+      doctorVisitModal.show();
     };
 
     document.querySelector(".js-login").onclick = () => {
