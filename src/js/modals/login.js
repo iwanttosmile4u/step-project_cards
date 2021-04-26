@@ -1,19 +1,15 @@
-import bootstrap from "bootstrap";
+import $ from "jquery";
 import { Input } from "../elements/input";
 import { Button } from "../elements/button";
 
 export class Login {
-  constructor() {
-    this.modal = new bootstrap.Modal(document.getElementById("mainModal"), {});
-  }
-
   show() {
     this.render();
-    this.modal.show();
+    $("#mainModal").modal("show");
   }
 
   hide() {
-    this.modal.hide();
+    $("#mainModal").modal("hide");
   }
 
   render() {

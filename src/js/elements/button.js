@@ -15,7 +15,7 @@ export class Button {
   render() {
     return `<button type="${this.type}" 
     class="${this.classList.join(" ")}" 
-    data-bs-dismiss="${this.dataDismiss}" 
+    ${this.dataDismiss ? `data-dismiss="${this.dataDismiss}"` : ""} 
     aria-label="${this.ariaLabel}">${this.text}</button>`;
   }
 }
