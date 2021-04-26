@@ -21,6 +21,11 @@ export class Application {
       doctorVisitModal.show();
     };
 
+    // document.getElementById("mainModal").onclick = (e) => {
+    //   const target = e.target;
+    //   if (target.querySelector != "js-login") return;
+    // };
+
     document.querySelector(".js-login").onclick = () => {
       const userApi = new UserApi();
       const email = document.querySelector('#mainModal input[name="email"]')
