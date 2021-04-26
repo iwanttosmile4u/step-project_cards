@@ -39,6 +39,8 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.14.3",
     "vanilla-modal": "^1.6.5"
   }
 }
