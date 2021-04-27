@@ -7,7 +7,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 800px;
+  // min-height: 800px;
   padding-top: 50px;
 }
 
@@ -22,3 +22,54 @@
 .form-select {
   color: $hoverTextColor;
 }
+
+// .visit-block{
+//   width: 100rem;
+//   margin: 0 auto;
+// }
+
+// .navigation {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr;
+//   gap: 3rem 3rem;
+//   padding: 3rem;
+// }
+
+// .visit {
+//   position: relative;
+//   display: flex;
+//   align-items: flex-start;
+//   align-content: flex-start;
+//   flex-wrap: wrap;
+//   min-height: 70vh;
+//   box-sizing: border-box;
+//   background-color: #6dddf0;
+//   border-radius: 4px;
+//   box-shadow: inset 0 -3px 10px 0 rgb(90, 90, 100);
+// }
+
+// .visit__title{
+//   position: absolute;
+//   top: 50%;
+//   left: 40%;
+//   transform: translate(-50%,-50%);
+//   font-size: 40px;
+//   font-weight: 600;
+//   letter-spacing: 1.2px;
+//   color: $mainTextColor;
+//  }
+
+//  .filter__btn {
+//   background: $btnColor;
+//   border: .1rem solid $btnColor;
+//   color: $mainTextColor;
+//   font-size: 1.6rem;
+//   line-height: 2.4rem;
+//   border-radius: 3rem;
+//   font-weight: 600;
+//   display: block;
+//   padding: .8rem 2rem;
+//  }
+
+ 
+ 
