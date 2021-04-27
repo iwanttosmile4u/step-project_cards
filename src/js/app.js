@@ -10,8 +10,8 @@ export class Application {
   }
 
   setupEvents() {
+    const loginModal = new Login();
     document.querySelector("#loginButton").onclick = () => {
-      const loginModal = new Login();
       loginModal.show();
     };
 
@@ -21,25 +21,31 @@ export class Application {
       doctorVisitModal.show();
     };
 
-    document.querySelector(".js-login").onclick = () => {
-      const userApi = new UserApi();
-      const email = document.querySelector('#mainModal input[name="email"]')
-        .value;
-      const password = document.querySelector(
-        '#mainModal input[name="password"]'
-      ).value;
+    document.getElementById("mainModal").onclick = (e) => {
+      const target = e.target;
 
-      userApi.login(
-        email,
-        password,
-        (token) => {
-          this.storage.token = token;
-          document.querySelector("#mainModal button[data-dismiss]").click();
-          document.querySelector("#createButton").hidden = false;
-          document.querySelector("#loginButton").hidden = true;
-        },
-        console.error
-      );
+      if (target.classList.contains("js-login")) {
+        const userApi = new UserApi();
+        const email = document.querySelector('#mainModal input[name="email"]')
+          .value;
+        const password = document.querySelector(
+          '#mainModal input[name="password"]'
+        ).value;
+        console.log(email, password);
+        userApi.login(
+          email,
+          password,
+          (token) => {
+            this.storage.token = token;
+            document.querySelector("#mainModal button[data-dismiss]").click();
+            document.querySelector("#createButton").hidden = false;
+            document.querySelector("#loginButton").hidden = true;
+          },
+          console.error
+        );
+      } else if (target.dataset.dismiss === "modal") {
+        loginModal.hide();
+      }
     };
   }
 }
