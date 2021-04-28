@@ -1,16 +1,27 @@
-import { Login } from "./modals/login";
+import { LoginModal } from "./modals/login";
 import { User as UserApi } from "./api/user";
 import { Storage } from "./api/storage";
 import { createCardModal } from "./modals/card-form";
+
+import "../assets/bootstrap/css/bootstrap.min.css";
+import "../scss/style.scss";
 
 export class Application {
   constructor() {
     this.storage = new Storage();
     this.setupEvents();
+    if (this.storage.token) {
+      this.hideLoginButton();
+    }
+  }
+
+  hideLoginButton() {
+    document.querySelector("#createButton").hidden = false;
+    document.querySelector("#loginButton").hidden = true;
   }
 
   setupEvents() {
-    const loginModal = new Login();
+    const loginModal = new LoginModal();
     document.querySelector("#loginButton").onclick = () => {
       loginModal.show();
     };
@@ -38,8 +49,7 @@ export class Application {
           (token) => {
             this.storage.token = token;
             document.querySelector("#mainModal button[data-dismiss]").click();
-            document.querySelector("#createButton").hidden = false;
-            document.querySelector("#loginButton").hidden = true;
+            this.hideLoginButton();
           },
           console.error
         );

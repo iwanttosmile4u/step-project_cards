@@ -2,7 +2,7 @@ import $ from "jquery";
 import { Input } from "../elements/input";
 import { Button } from "../elements/button";
 
-export class Login {
+export class LoginModal {
   show() {
     this.render();
     $("#mainModal").modal("show");
