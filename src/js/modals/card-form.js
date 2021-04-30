@@ -44,17 +44,3 @@ export class createCardModal {
     this.modalElement.find(".modal-body").append(form.getBody());
   }
 }
-
-/*
-<div class="modal-dialog modal-dialog-scrollable">
-<div class="modal-content bg-info text-white">
-  <div class="modal-header">
-    <h5 class="modal-title text-uppercase fs-4 fw-bold mx-auto" id="exampleModalLabel">Create a visit</h5>
-    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-  
-</div>
-</div>
-
-*/
