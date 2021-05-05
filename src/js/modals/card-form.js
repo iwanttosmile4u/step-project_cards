@@ -12,6 +12,7 @@ export class createCardModal {
 
   show() {
     this.modalElement.modal("show");
+    // todo: add event listener on doctor select
   }
 
   hide() {
