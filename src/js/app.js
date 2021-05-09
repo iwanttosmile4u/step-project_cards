@@ -5,14 +5,31 @@ import { createCardModal } from "./modals/card-form";
 
 import "../assets/bootstrap/css/bootstrap.min.css";
 import "../scss/style.scss";
+import { Cards } from "./api/cards";
+import { VisitFactory } from "./objects/visitFactory";
+import { Card } from "./elements/card";
 
 export class Application {
   constructor() {
     this.storage = new Storage();
+    this.cardsApi = new Cards();
     this.setupEvents();
     if (this.storage.token) {
+      this.fetchCards();
       this.hideLoginButton();
     }
+  }
+
+  fetchCards() {
+    this.cardsApi.getAll((objects) => {
+      const visits = objects.map(VisitFactory.getVisit);
+      const renderBlock = document.querySelector("#cards-block");
+      renderBlock.innerHTML = "";
+      visits.forEach((visit) => {
+        const card = new Card(visit);
+        renderBlock.innerHTML += card.render();
+      });
+    });
   }
 
   hideLoginButton() {
@@ -48,6 +65,7 @@ export class Application {
           password,
           (token) => {
             this.storage.token = token;
+            this.fetchCards();
             document.querySelector("#mainModal button[data-dismiss]").click();
             this.hideLoginButton();
           },
