@@ -60,7 +60,6 @@ export class Application {
       loginModal.show();
     };
 
-    //по кліку з'являється модалка з формою
     document.querySelector("#createButton").onclick = () => {
       const doctorVisitModal = new createCardModal();
       doctorVisitModal.show();

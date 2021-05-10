@@ -12,7 +12,6 @@ import { DentistVisit } from "../objects/dentinstVisit";
 import { Cards } from "../api/cards";
 import { VisitFactory } from "../objects/visitFactory";
 
-//експортую клас модалки для створення візиту і імпортую потім цей клас в файлі app.js
 export class createCardModal {
   constructor(visit = {}) {
     this.cardApi = new Cards();
