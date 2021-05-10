@@ -8,12 +8,15 @@ import "../scss/style.scss";
 import { Cards } from "./api/cards";
 import { VisitFactory } from "./objects/visitFactory";
 import { Card } from "./elements/card";
+import { Filters } from "./filters";
 
 export class Application {
   constructor() {
     this.storage = new Storage();
     this.cardsApi = new Cards();
+    this.filters = new Filters();
     this.setupEvents();
+    this.filters.setupFilters();
     if (this.storage.token) {
       this.fetchCards();
       this.hideLoginButton();
@@ -21,17 +24,19 @@ export class Application {
   }
 
   fetchCards() {
-    this.cardsApi.getAll((objects) => {
-      const visits = objects.map(VisitFactory.getVisit);
-      const renderBlock = document.querySelector("#cards-block");
-      renderBlock.innerHTML = "";
-      if (!visits.length) {
-        renderBlock.innerHTML = "No items have been added";
-      }
-      visits.forEach((visit) => {
-        const card = new Card(visit);
-        renderBlock.innerHTML += card.render();
-      });
+    this.cardsApi.getAll(Application.renderVisits);
+  }
+
+  static renderVisits(objects) {
+    const visits = objects.map(VisitFactory.getVisit);
+    const renderBlock = document.querySelector("#cards-block");
+    renderBlock.innerHTML = "";
+    if (!visits.length) {
+      renderBlock.innerHTML = "No items have been added";
+    }
+    visits.forEach((visit) => {
+      const card = new Card(visit);
+      renderBlock.innerHTML += card.render();
     });
   }
 

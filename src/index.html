@@ -80,26 +80,16 @@
         <div class="container">
         <div class="d-flex flex-row justify-content-evenly bd-highlight mb-3">
           <div class="p-2 bd-highlight mt-4">
-            <p class="header-select">visit header:</p>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="p-2 bd-highlight mt-4">
-            <p class="header-select">visit status:</p>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">Open</option>
-              <option value="2">Done</option>
-            </select>
+            <p class="header-select">description:</p>
+            <input type="text" class="form-control" id="description-filter">
           </div>
           <div class="p-2 bd-highlight mt-4">
             <p class="header-select">visit urgency:</p>
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">High</option>
-              <option value="2">Normal</option>
-              <option value="3">Low</option>
+            <select class="form-select" aria-label="Default select example" id="urgency-filter">
+              <option value=""></option>
+              <option value="high">High</option>
+              <option value="normal">Normal</option>
+              <option value="low">Low</option>
             </select>
           </div>
         </div>
