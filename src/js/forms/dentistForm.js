@@ -1,13 +1,17 @@
 import { Input } from "../elements/input";
 
 export class DentistForm {
+  constructor(visit) {
+    this.visit = visit;
+  }
+
   renderFields() {
     const formBlock = document.querySelector("#additional-fields");
 
     const dateInput = new Input({
       name: "lastVisitDate",
       type: "text",
-      value: "",
+      value: this.visit.lastVisitDate || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",

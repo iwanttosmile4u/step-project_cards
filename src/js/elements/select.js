@@ -1,9 +1,16 @@
 export class Select {
-  constructor({ classList = [], ariaLabel = "", options = [], name = "" }) {
+  constructor({
+    classList = [],
+    ariaLabel = "",
+    options = [],
+    name = "",
+    value = "",
+  }) {
     this.classList = classList;
     this.ariaLabel = ariaLabel;
     this.options = options;
     this.name = name;
+    this.value = value;
   }
 
   render() {
@@ -14,7 +21,12 @@ export class Select {
     >
     ${this.options
       .map(
-        (option) => `<option value="${option.value}">${option.text}</option>`
+        (option) => `<option 
+          ${this.value === option.value ? "selected" : ""} 
+          value="${option.value}"
+        >
+          ${option.text}
+        </option>`
       )
       .join("")}
     </select>`;

@@ -14,10 +14,10 @@ import { VisitFactory } from "../objects/visitFactory";
 
 //експортую клас модалки для створення візиту і імпортую потім цей клас в файлі app.js
 export class createCardModal {
-  constructor() {
+  constructor(visit = {}) {
     this.cardApi = new Cards();
     this.modalElement = $("#formModal");
-    this.render();
+    this.render(visit);
     this.doctorSelect = document.querySelector("select.doctor-select");
     this.form = document.querySelector("#formModal form");
   }
@@ -35,20 +35,24 @@ export class createCardModal {
   }
 
   onDoctorSelect = (event) => {
-    switch (event.target.value) {
+    this.renderSelectedDocktorFormPart(event.target.value);
+  };
+
+  renderSelectedDocktorFormPart(doctor, visit = {}) {
+    switch (doctor) {
       case TherapistVisit.getDoctorType():
-        new TherapistForm().renderFields();
+        new TherapistForm(visit).renderFields();
         break;
       case CardiologistVisit.getDoctorType():
-        new CardiologistForm().renderFields();
+        new CardiologistForm(visit).renderFields();
         break;
       case DentistVisit.getDoctorType():
-        new DentistForm().renderFields();
+        new DentistForm(visit).renderFields();
         break;
       default:
         document.querySelector("#additional-fields").innerHTML = "";
     }
-  };
+  }
 
   onSubmit = (event) => {
     event.preventDefault();
@@ -58,16 +62,27 @@ export class createCardModal {
       .forEach(({ name, value }) => {
         visit[name] = value;
       });
-    this.cardApi.create(visit, (data) => {
-      this.hide();
-      const card = VisitFactory.getVisit(data);
-      const renderBlock = document.querySelector("#cards-block");
-      renderBlock.innerHTML += new Card(card).render();
-    });
+    visit.id = this.form.dataset.id;
+    if (visit.id) {
+      this.cardApi.edit(visit, this.successSubmitCallback);
+    } else {
+      this.cardApi.create(visit, this.successSubmitCallback);
+    }
   };
 
-  render() {
-    const form = new Form();
+  successSubmitCallback = (data) => {
+    this.hide();
+    const existingCard = document.querySelector(`.card[data-id="${data.id}"]`);
+    if (existingCard) {
+      existingCard.remove();
+    }
+    const card = VisitFactory.getVisit(data);
+    const renderBlock = document.querySelector("#cards-block");
+    renderBlock.innerHTML += new Card(card).render();
+  };
+
+  render(visit) {
+    const form = new Form(visit);
     const topCloseButton = new Button({
       type: "button",
       classList: ["btn-close", "m-0"],
@@ -90,5 +105,8 @@ export class createCardModal {
     `)
     );
     this.modalElement.find(".modal-body").append(form.getBody());
+    if (visit.doctor) {
+      this.renderSelectedDocktorFormPart(visit.doctor, visit);
+    }
   }
 }

@@ -7,7 +7,7 @@ export class Card {
   render() {
     const id = "card-" + this.#visit.id;
     return `
-    <div class="card m-2" style="width: 18rem;">
+    <div class="card m-2" style="width: 18rem;" data-id="${this.#visit.id}">
         <div class="card-header text-info text-center text-uppercase font-weight-bold bg-light h4">
             ${this.#visit.doctor} visit
         </div>
@@ -22,8 +22,8 @@ export class Card {
           })
           .join("")}
           <li class="mx-auto">
-          <button type="button" class="btn btn-info mt-2 mb-2 btn-sm">Edit</button>
-          <button type="button" class="btn btn-danger mt-2 mb-2 btn-sm">Delete</button>
+          <button type="button" class="btn btn-info mt-2 mb-2 btn-sm js-edit-btn">Edit</button>
+          <button type="button" class="btn btn-danger mt-2 mb-2 btn-sm js-delete-btn">Delete</button>
           </li>
         </ul>
         <a 

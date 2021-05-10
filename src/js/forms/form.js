@@ -7,17 +7,19 @@ import { DentistVisit } from "../objects/dentinstVisit";
 import { TherapistVisit } from "../objects/therapistVisit";
 
 export class Form {
-  constructor() {
+  constructor(visit = {}) {
+    this.editMode = !!visit.doctor;
     this.formBlock = document.createElement("form");
-    this.init();
+    this.formBlock.dataset.id = visit.id || "";
+    this.init(visit);
     this.addButtons();
   }
 
-  init() {
+  init(visit) {
     const purposeInput = new Input({
       name: "goal",
       type: "text",
-      value: "",
+      value: visit.goal || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",
@@ -27,7 +29,7 @@ export class Form {
     const userNameInput = new Input({
       name: "fullName",
       type: "text",
-      value: "",
+      value: visit.fullName || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",
@@ -36,6 +38,7 @@ export class Form {
 
     const doctorSelect = new Select({
       name: "doctor",
+      value: visit.doctor || "",
       classList: ["form-select", "doctor-select"],
       ariaLabel: "Default select example",
       options: [
@@ -54,6 +57,7 @@ export class Form {
 
     const urgencySelect = new Select({
       name: "urgency",
+      value: visit.urgency || "",
       classList: ["form-select"],
       ariaLabel: "Default select example",
       options: [
@@ -65,6 +69,7 @@ export class Form {
 
     const descriptionTextarea = new Textarea({
       name: "description",
+      value: visit.description || "",
       classList: ["form-control"],
       ariaLabel: "With textarea",
     });
@@ -101,7 +106,12 @@ export class Form {
     this.formBlock.innerHTML += `
     <div class="modal-footer mx-auto">
     ${closeBottomButton.render()}
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button 
+    type="submit" 
+    class="btn btn-primary"
+    >
+      ${this.editMode ? "Edit" : "Create"}
+    </button>
   </div>`;
   }
 

@@ -25,6 +25,9 @@ export class Application {
       const visits = objects.map(VisitFactory.getVisit);
       const renderBlock = document.querySelector("#cards-block");
       renderBlock.innerHTML = "";
+      if (!visits.length) {
+        renderBlock.innerHTML = "No items have been added";
+      }
       visits.forEach((visit) => {
         const card = new Card(visit);
         renderBlock.innerHTML += card.render();
@@ -73,6 +76,28 @@ export class Application {
         );
       } else if (target.dataset.dismiss === "modal") {
         loginModal.hide();
+      }
+    };
+
+    document.getElementById("cards-block").onclick = (e) => {
+      if (e.target.classList.contains("js-delete-btn")) {
+        const id = e.target.closest(".card").dataset.id;
+        this.cardsApi.delete(id, () => {
+          const existingCard = document.querySelector(`.card[data-id="${id}"]`);
+          if (existingCard) {
+            existingCard.remove();
+          }
+        });
+        return;
+      }
+      if (e.target.classList.contains("js-edit-btn")) {
+        const id = e.target.closest(".card").dataset.id;
+        this.cardsApi.getOne(id, (details) => {
+          const visit = VisitFactory.getVisit(details);
+          const doctorVisitModal = new createCardModal(visit);
+          doctorVisitModal.show();
+        });
+        return;
       }
     };
   }

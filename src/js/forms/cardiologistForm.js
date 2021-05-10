@@ -2,11 +2,16 @@ import { Input } from "../elements/input";
 import { Textarea } from "../elements/textarea";
 
 export class CardiologistForm {
+  constructor(visit) {
+    this.visit = visit;
+  }
+
   renderFields() {
     const formBlock = document.querySelector("#additional-fields");
 
     const diseasesTextarea = new Textarea({
       name: "diseases",
+      value: this.visit.diseases || "",
       classList: ["form-control"],
       ariaLabel: "With textarea",
     });
@@ -14,7 +19,7 @@ export class CardiologistForm {
     const pressureInput = new Input({
       name: "bp",
       type: "text",
-      value: "",
+      value: this.visit.bp || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",
@@ -24,7 +29,7 @@ export class CardiologistForm {
     const massIndexInput = new Input({
       name: "weight",
       type: "text",
-      value: "",
+      value: this.visit.weight || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",
@@ -34,7 +39,7 @@ export class CardiologistForm {
     const ageInput = new Input({
       name: "age",
       type: "number",
-      value: "",
+      value: this.visit.age || "",
       classList: ["form-control"],
       placeholder: "",
       ariaLabel: "Recipient's username",
