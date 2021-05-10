@@ -31,7 +31,7 @@ export class Application {
     const visits = objects.map(VisitFactory.getVisit);
     const renderBlock = document.querySelector("#cards-block");
     renderBlock.innerHTML = "";
-    if (!objects) {
+    if (!objects || !objects.length) {
       Application.setNoItemsTextIfNeeded();
     }
 
