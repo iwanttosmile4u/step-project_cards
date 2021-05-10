@@ -77,7 +77,7 @@ export class createCardModal {
     }
     const card = VisitFactory.getVisit(data);
     const renderBlock = document.querySelector("#cards-block");
-    if (!renderBlock.querySelector(".cards")) {
+    if (!renderBlock.querySelector(".card")) {
       renderBlock.innerHTML = "";
     }
     renderBlock.innerHTML += new Card(card).render();
