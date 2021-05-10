@@ -1,1 +1,12 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
 
+.btn {
+  color: $mainTextColor;
+  width: 120px;
+}
+
+.btn:hover {
+  color: $hoverTextColor;
+}
