@@ -22,3 +22,21 @@
 .form-select {
   color: $hoverTextColor;
 }
+
+#cards-block .card .list-group.collapse:not(.show) {
+  display: block;
+  height: 2rem;
+  overflow: hidden;
+}
+
+#cards-block .card .list-group.collapsing {
+  height: 4rem;
+}
+
+#cards-block a.collapsed::after {
+  content: "+ Show More";
+}
+
+#cards-block a:not(.collapsed)::after {
+  content: "- Show Less";
+}

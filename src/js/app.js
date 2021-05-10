@@ -5,14 +5,48 @@ import { createCardModal } from "./modals/card-form";
 
 import "../assets/bootstrap/css/bootstrap.min.css";
 import "../scss/style.scss";
+import { Cards } from "./api/cards";
+import { VisitFactory } from "./objects/visitFactory";
+import { Card } from "./elements/card";
+import { Filters } from "./filters";
 
 export class Application {
   constructor() {
     this.storage = new Storage();
+    this.cardsApi = new Cards();
+    this.filters = new Filters();
     this.setupEvents();
+    this.filters.setupFilters();
     if (this.storage.token) {
+      this.fetchCards();
       this.hideLoginButton();
     }
+  }
+
+  fetchCards() {
+    this.cardsApi.getAll(Application.renderVisits);
+  }
+
+  static renderVisits(objects) {
+    const visits = objects.map(VisitFactory.getVisit);
+    const renderBlock = document.querySelector("#cards-block");
+    renderBlock.innerHTML = "";
+    if (!objects) {
+      Application.setNoItemsTextIfNeeded();
+    }
+
+    visits.forEach((visit) => {
+      const card = new Card(visit);
+      renderBlock.innerHTML += card.render();
+    });
+  }
+
+  static setNoItemsTextIfNeeded() {
+    const renderBlock = document.querySelector("#cards-block");
+    if (renderBlock.querySelector(".card")) {
+      return;
+    }
+    renderBlock.innerHTML = "No items have been added";
   }
 
   hideLoginButton() {
@@ -48,6 +82,7 @@ export class Application {
           password,
           (token) => {
             this.storage.token = token;
+            this.fetchCards();
             document.querySelector("#mainModal button[data-dismiss]").click();
             this.hideLoginButton();
           },
@@ -55,6 +90,29 @@ export class Application {
         );
       } else if (target.dataset.dismiss === "modal") {
         loginModal.hide();
+      }
+    };
+
+    document.getElementById("cards-block").onclick = (e) => {
+      if (e.target.classList.contains("js-delete-btn")) {
+        const id = e.target.closest(".card").dataset.id;
+        this.cardsApi.delete(id, () => {
+          const existingCard = document.querySelector(`.card[data-id="${id}"]`);
+          if (existingCard) {
+            existingCard.remove();
+            Application.setNoItemsTextIfNeeded();
+          }
+        });
+        return;
+      }
+      if (e.target.classList.contains("js-edit-btn")) {
+        const id = e.target.closest(".card").dataset.id;
+        this.cardsApi.getOne(id, (details) => {
+          const visit = VisitFactory.getVisit(details);
+          const doctorVisitModal = new createCardModal(visit);
+          doctorVisitModal.show();
+        });
+        return;
       }
     };
   }
