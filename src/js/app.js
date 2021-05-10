@@ -31,13 +31,22 @@ export class Application {
     const visits = objects.map(VisitFactory.getVisit);
     const renderBlock = document.querySelector("#cards-block");
     renderBlock.innerHTML = "";
-    if (!visits.length) {
-      renderBlock.innerHTML = "No items have been added";
+    if (!objects) {
+      Application.setNoItemsTextIfNeeded();
     }
+
     visits.forEach((visit) => {
       const card = new Card(visit);
       renderBlock.innerHTML += card.render();
     });
+  }
+
+  static setNoItemsTextIfNeeded() {
+    const renderBlock = document.querySelector("#cards-block");
+    if (renderBlock.querySelector(".card")) {
+      return;
+    }
+    renderBlock.innerHTML = "No items have been added";
   }
 
   hideLoginButton() {
@@ -91,6 +100,7 @@ export class Application {
           const existingCard = document.querySelector(`.card[data-id="${id}"]`);
           if (existingCard) {
             existingCard.remove();
+            Application.setNoItemsTextIfNeeded();
           }
         });
         return;

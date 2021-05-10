@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $, { removeData } from "jquery";
 import bootstrap from "bootstrap";
 import { Form } from "../forms/form";
 import { TherapistForm } from "../forms/therapistForm";
@@ -78,6 +78,9 @@ export class createCardModal {
     }
     const card = VisitFactory.getVisit(data);
     const renderBlock = document.querySelector("#cards-block");
+    if (!renderBlock.querySelector(".cards")) {
+      renderBlock.innerHTML = "";
+    }
     renderBlock.innerHTML += new Card(card).render();
   };
 
